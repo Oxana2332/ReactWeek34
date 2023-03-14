@@ -1,29 +1,36 @@
-import '../src/style/app.css';
-import '../src/style/header.css'
-import Footer from './components/Footer/Footer.jsx';
 import { Route, NavLink, Routes } from 'react-router-dom';
-import {Home, Game, Error} from './Pages'
-
+import { Provider } from 'mobx-react';
+import Footer from './components/Footer/Footer.jsx';
+import { Home, Game, Error } from './Pages';
+import store from './stores/Words.js';
+import './style/header.css';
 
 function App() {
+	return (
+		<Provider {...store}>
+			<div className="App">
+				<header className="header">
+					<NavLink className="header_link" end to="/">
+						Home
+					</NavLink>
+					<NavLink className="header_link" end to="/">
+						<img src="assets/logo.svg" alt="logo" />
+					</NavLink>
+					<NavLink className="header_link" end to="/game">
+						Game
+					</NavLink>
+				</header>
 
-  return (
-    <div className="App">
-      <header className="header">
-        <NavLink className="header_link" end to='/'>Home</NavLink>
-        <NavLink className="header_link" end to='/'><img src='assets/logo.svg' alt='logo' /></NavLink>
-        <NavLink className="header_link" end to='/game'>Game</NavLink>
-      </header>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/game" element={<Game />} />
+					<Route path="*" element={<Error />} />
+				</Routes>
 
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/game' element={<Game/>} />
-        <Route path='*' element={<Error/>} />
-      </Routes>
-
-      <Footer />
-    </div>
-  );
+				<Footer />
+			</div>
+		</Provider>
+	);
 }
 
 export default App;

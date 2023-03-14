@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import WordItem from '../components/WordItem/WordItem.jsx';
 import AddNew from '../components/AddNew/AddNew.jsx';
-import data from '../data/data.json';
+import WordsStore from '../stores/Words.js';
 import '../style/home.css';
 import '../style/variables.css';
 
-function Home() {
+const Home = observer(() => {
+	const { rows } = WordsStore;
+	console.log(rows);
 	const [words, setWords] = useState([]);
 	const titleArr = ['english', 'transcription', 'russian', 'topic'];
 
 	useEffect(() => {
-		setWords(data);
+		setWords(rows);
 	}, []);
 
 	function editWordItem(english, transcription, russian, tags, id) {
-		const resultEditWords = data.map((item) => {
+		const resultEditWords = rows.map((item) => {
 			if (item.id === id) {
 				item.english = english;
 				item.transcription = transcription;
@@ -43,7 +46,7 @@ function Home() {
 				})}
 			</div>
 			<AddNew />
-			{words.map((item) => (
+			{rows.map((item) => (
 				<WordItem
 					key={item.id}
 					item={{ ...item }}
@@ -52,6 +55,6 @@ function Home() {
 			))}
 		</div>
 	);
-}
+});
 
 export default Home;
