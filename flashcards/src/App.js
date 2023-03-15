@@ -3,6 +3,7 @@ import { Provider } from 'mobx-react';
 import Footer from './components/Footer/Footer.jsx';
 import { Home, Game, Error } from './Pages';
 import store from './stores/Words.js';
+import '../src/style/app.css';
 import './style/header.css';
 
 function App() {
