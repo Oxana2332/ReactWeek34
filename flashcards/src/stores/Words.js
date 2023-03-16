@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import GET from '../services/GET';
 
 class WordsStore {
-	rows = [];
+	words = [];
 
 	constructor() {
 		makeAutoObservable(this);
@@ -11,8 +11,8 @@ class WordsStore {
 
 	async fetch() {
 		const data = await GET.getWords();
-		this.rows = data;
+		this.words = data;
 	}
 }
 
-export default new WordsStore();
+export default WordsStore;

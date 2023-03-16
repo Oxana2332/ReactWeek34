@@ -2,13 +2,13 @@ import { Route, NavLink, Routes } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import Footer from './components/Footer/Footer.jsx';
 import { Home, Game, Error } from './Pages';
-import store from './stores/Words.js';
+import WordsStore from './stores/Words.js';
 import '../src/style/app.css';
 import './style/header.css';
 
 function App() {
 	return (
-		<Provider {...store}>
+		<Provider wordsStore={new WordsStore()}>
 			<div className="App">
 				<header className="header">
 					<NavLink className="header_link" end to="/">
